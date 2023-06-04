@@ -19,7 +19,9 @@ export class CoursesService {
   }
 
   async findOne(id: number): Promise<Course> {
-    const course = await this.courseRepository.findOne(id);
+    const course = await this.courseRepository.findOneBy({
+      id,
+    });
     if (!course) {
       throw new NotFoundException(`Course #${id} not found`);
     }
@@ -60,7 +62,7 @@ export class CoursesService {
   }
 
   private async preloadTagByName(name: string): Promise<Tag> {
-    const tag = await this.tagRepository.findOne({ name });
+    const tag = await this.tagRepository.findOneBy({ name });
     if (tag) {
       return tag;
     }
