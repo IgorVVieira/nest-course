@@ -1,0 +1,22 @@
+name: Testes Unitários
+
+on: [push, pull_request]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Verificar o código
+        uses: actions/checkout@v2
+
+      - name: Configurar o Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: 18
+
+      - name: Instalar dependências
+        run: npm install
+
+      - name: Executar testes
+        run: npm test
