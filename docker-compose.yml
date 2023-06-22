@@ -1,0 +1,44 @@
+version: '3.2'
+
+services:
+  app:
+    restart: always
+    # build de uma imagem local (Dockefile)
+    build: .
+    container_name: curso-nestjs-app
+    ports:
+      - "3000:3000"
+    # compartilhar tudo da minha aplicação com o container
+    volumes:
+      - .:/app
+    depends_on:
+      - postgres
+
+  postgres:
+    image: postgres
+    container_name: postgres
+    restart: always
+    # acsso ao terminal do container
+    tty: true
+    # Espelhar a pasta do container com a pasta local
+    volumes:
+      - .docker/postgres:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: curso_nestjs
+
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: pgadmin
+    tty: true
+    restart: always
+    ports:
+      - "15432:80"
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+    depends_on:
+      - postgres
