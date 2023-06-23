@@ -43,5 +43,21 @@ services:
     depends_on:
       - postgres
 
+  migration:
+    build: .
+    command:
+      [
+        "./wait-for-it/wait-for-it.sh",
+        "postgres:5432",
+        "--",
+        "npm",
+        "run",
+        "migration:run"
+      ]
+    links:
+      - postgres
+    depends_on:
+      - postgres
+
 volumes:
   db_data:
