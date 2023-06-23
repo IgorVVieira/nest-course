@@ -4,13 +4,18 @@ import {
   Column,
   ManyToMany,
   JoinTable,
+  CreateDateColumn,
+  UpdateDateColumn,
+  BeforeInsert,
 } from 'typeorm';
 import { Tag } from './tag.entity';
 
+import { v4 as uuid } from 'uuid';
+
 @Entity('courses')
 export class Course {
-  @PrimaryGeneratedColumn()
-  id: number;
+  @PrimaryGeneratedColumn('uuid')
+  id: string;
 
   @Column()
   name: string;
@@ -18,12 +23,25 @@ export class Course {
   @Column()
   description: string;
 
-  // cascade: pode cadastrar tags ao mesmo tempo que cadastramos um curso
-  // eager: quando buscarmos um curso, ele já traz as tags automaticamente
-  @JoinTable()
+  @CreateDateColumn({ type: 'timestamp' })
+  created_at: Date;
+
+  @UpdateDateColumn({ type: 'timestamp' })
+  updated_at: Date;
+
+  @JoinTable({
+    name: 'courses_tags',
+  })
   @ManyToMany(() => Tag, (tag) => tag.courses, {
     cascade: true,
-    eager: true,
   })
   tags: Tag[];
+
+  @BeforeInsert()
+  generateId(): void {
+    if (this.id) {
+      return;
+    }
+    this.id = uuid();
+  }
 }

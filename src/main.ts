@@ -3,6 +3,7 @@ import { AppModule } from './app.module';
 import { ValidationPipe } from '@nestjs/common';
 
 async function bootstrap() {
+  console.log('Iniciando servidor...');
   const app = await NestFactory.create(AppModule);
   app.enableCors();
   // Para validar tipos do DTO
@@ -21,5 +22,4 @@ async function bootstrap() {
 }
 bootstrap();
 
-// npx typeorm migration:run -d dist/database/database.providers.js
 // npx typeorm migration:crate ./src/migrations/CreateTagsTable

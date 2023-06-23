@@ -19,7 +19,7 @@ export class CoursesService {
     });
   }
 
-  async findOne(id: number): Promise<Course> {
+  async findOne(id: string): Promise<Course> {
     const course = await this.courseRepository.findOneBy({
       id,
     });
@@ -39,7 +39,7 @@ export class CoursesService {
     });
   }
 
-  async update(id: number, updateCourseDto: UpdateCourseDto): Promise<Course> {
+  async update(id: string, updateCourseDto: UpdateCourseDto): Promise<Course> {
     const tags =
       updateCourseDto.tags &&
       (await Promise.all(
@@ -57,7 +57,7 @@ export class CoursesService {
     return await this.courseRepository.save(course);
   }
 
-  async remove(id: number): Promise<void> {
+  async remove(id: string): Promise<void> {
     await this.findOne(id);
     await this.courseRepository.delete(id);
   }

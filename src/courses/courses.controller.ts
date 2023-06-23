@@ -24,7 +24,7 @@ export class CoursesController {
 
   @Get(':id')
   async findOne(@Param('id') id: string) {
-    return await this.coursesService.findOne(+id);
+    return await this.coursesService.findOne(id);
   }
 
   @Post()
@@ -37,12 +37,12 @@ export class CoursesController {
     @Param('id') id: string,
     @Body() updateCourseDto: UpdateCourseDto,
   ) {
-    return await this.coursesService.update(+id, updateCourseDto);
+    return await this.coursesService.update(id, updateCourseDto);
   }
 
   @Delete(':id')
   @HttpCode(HttpStatus.NO_CONTENT)
   async remove(@Param('id') id: string) {
-    return await this.coursesService.remove(+id);
+    return await this.coursesService.remove(id);
   }
 }
