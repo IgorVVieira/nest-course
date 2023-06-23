@@ -21,5 +21,5 @@ async function bootstrap() {
 }
 bootstrap();
 
-// npx typeorm migration:run -d ./src/migrations
+// npx typeorm migration:run -d dist/database/database.providers.js
 // npx typeorm migration:crate ./src/migrations/CreateTagsTable
