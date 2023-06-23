@@ -20,3 +20,6 @@ async function bootstrap() {
   await app.listen(3000);
 }
 bootstrap();
+
+// npx typeorm migration:run -d ./src/migrations
+// npx typeorm migration:crate ./src/migrations/CreateTagsTable
