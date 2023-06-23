@@ -48,7 +48,7 @@ describe('CoursesService', () => {
 
   describe('findOne', () => {
     it('should return a course with the given id', async () => {
-      const courseId = 1;
+      const courseId = 'id';
       const expectedCourse = new Course();
       jest.spyOn(courseRepository, 'findOne').mockResolvedValue(expectedCourse);
 
@@ -58,7 +58,7 @@ describe('CoursesService', () => {
     });
 
     it('should throw NotFoundException if course is not found', async () => {
-      const courseId = 1;
+      const courseId = 'id';
       jest.spyOn(courseRepository, 'findOne').mockResolvedValue(undefined);
 
       await expect(coursesService.findOne(courseId)).rejects.toThrow(
@@ -89,7 +89,7 @@ describe('CoursesService', () => {
 
   describe('update', () => {
     it('should update a course with the provided data', async () => {
-      const courseId = 1;
+      const courseId = 'id';
       const updateCourseDto: UpdateCourseDto = {
         name: 'Updated Course',
         tags: ['updated-tag1', 'updated-tag2'],
@@ -109,7 +109,7 @@ describe('CoursesService', () => {
     });
 
     it('should throw NotFoundException if course is not found', async () => {
-      const courseId = 1;
+      const courseId = 'id';
       const updateCourseDto: UpdateCourseDto = {
         name: 'Updated Course',
       };
@@ -123,7 +123,7 @@ describe('CoursesService', () => {
 
   describe('remove', () => {
     it('should remove a course with the given id', async () => {
-      const courseId = 1;
+      const courseId = 'id';
       const existingCourse = new Course();
       jest.spyOn(coursesService, 'findOne').mockResolvedValue(existingCourse);
       jest.spyOn(courseRepository, 'delete').mockResolvedValue(undefined);
@@ -134,7 +134,7 @@ describe('CoursesService', () => {
     });
 
     it('should throw NotFoundException if course is not found', async () => {
-      const courseId = 1;
+      const courseId = 'id';
       jest
         .spyOn(coursesService, 'findOne')
         .mockRejectedValue(new NotFoundException());
