@@ -5,18 +5,33 @@ import { CreateCourseDto } from './dto/create-course.dto';
 import { UpdateCourseDto } from './dto/update-course.dto';
 import { Course } from './entities/course.entity';
 
+type MockService = Partial<Record<keyof CoursesService, jest.Mock>>;
+const mockService = (): MockService =>
+  ({
+    findAll: jest.fn(),
+    findOne: jest.fn(),
+    create: jest.fn(),
+    update: jest.fn(),
+    remove: jest.fn(),
+  } as MockService);
+
 describe('CoursesController', () => {
   let controller: CoursesController;
-  let service: CoursesService;
+  let service: MockService;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       controllers: [CoursesController],
-      providers: [CoursesService],
+      providers: [
+        {
+          provide: CoursesService,
+          useValue: mockService(),
+        },
+      ],
     }).compile();
 
     controller = module.get<CoursesController>(CoursesController);
-    service = module.get<CoursesService>(CoursesService);
+    service = module.get<MockService>(CoursesService);
   });
 
   describe('findAll', () => {
