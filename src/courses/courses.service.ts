@@ -58,7 +58,6 @@ export class CoursesService {
   }
 
   async remove(id: string): Promise<void> {
-    await this.findOne(id);
     await this.courseRepository.delete(id);
   }
 
