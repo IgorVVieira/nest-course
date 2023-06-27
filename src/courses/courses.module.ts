@@ -3,7 +3,7 @@ import { CoursesService } from './courses.service';
 import { CoursesController } from './courses.controller';
 import { courseProviders } from './course.providers';
 import { tagProviders } from './tags.provider';
-import { DatabaseModule } from 'src/database/database.module';
+import { DatabaseModule } from '../database/database.module';
 
 @Module({
   imports: [DatabaseModule],

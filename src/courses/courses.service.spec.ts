@@ -74,7 +74,7 @@ describe('CoursesService', () => {
   });
 
   describe('create', () => {
-    it('should return a course', async () => {
+    it('should create a course', async () => {
       const createCourseDto = {
         name: 'Course 1',
         description: 'Course 1 description',

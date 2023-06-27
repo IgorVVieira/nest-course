@@ -19,7 +19,6 @@ const testDataSource = new DataSource({
   username: process.env.POSTGRES_USER,
   password: process.env.POSTGRES_PASSWORD,
   database: process.env.POSTGRES_DB_TEST,
-  autoLoadEntities: true,
   synchronize: true,
 });
 
